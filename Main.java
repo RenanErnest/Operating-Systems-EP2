@@ -1,4 +1,28 @@
 import java.io.*;
+import java.util.Random;
+
+class Reader extends Thread{
+    public void run(String[] words) {
+        String[] read = new String[100];
+        Random rand = new Random();
+        for(int i = 0; i < 100; i++) {
+            int j = rand.nextInt(words.length);
+            read[i] = words[j];
+        }
+        //dormir por 1ms
+    }
+}
+
+class Writer extends Thread{
+    public void run(String[] words) {
+        Random rand = new Random();
+        for(int i = 0; i < 100; i++) {
+            int j = rand.nextInt(words.length);
+            words[j] = "MODIFICADO";
+        }
+        //dormir por 1ms
+    }
+}
 
 class Main{
 
