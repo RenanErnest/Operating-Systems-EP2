@@ -20,7 +20,12 @@ class Main {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
-                while(proporcao.crit.th > 0){}
+                for (Thread thread : proporcao.readers_writers) {
+                    try{
+                    thread.join();
+                    } catch (Exception e){}
+
+                }
                 p = System.currentTimeMillis() - p;
                 part1 += p;
             }
@@ -43,6 +48,11 @@ class Main {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
+                for (Thread thread : proporcao.readers_writers) {
+                    try{
+                    thread.join();
+                    } catch (Exception e){}
+                }
                 p = System.currentTimeMillis() - p;
                 part2 += p;
             }
@@ -65,6 +75,12 @@ class Main {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
+                for (Thread thread : proporcao.readers_writers) {
+                    try{
+                    thread.join();
+                    } catch (Exception e){}
+
+                }
                 p = System.currentTimeMillis() - p;
                 part3 += p;
             }
