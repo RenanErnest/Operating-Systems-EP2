@@ -1,6 +1,6 @@
 import java.util.*;
 
-class CriticalRegionReadersPriority {
+class CriticalRegionReadersPriority{
     String[] words;
     int readers = 0;
 
@@ -121,7 +121,7 @@ class ReadersPriority{
         // preenchendo threads em ordem aleatoria seguindo as proporcoes
         for(int k = 0; k < readers_num; k++) // criar readers_num readers
         {
-            readers_writers[numbers.get(k)] = new ReaderRP(crit);
+            readers_writers[numbers.get(k)] = new ReaderRP(crit); 
         }
         for(int k = readers_num; k < readers_num + writers_num; k++) // criar writers_num writers (começa no readers_num e vai até readers_num + writers_num: 100)
         {
