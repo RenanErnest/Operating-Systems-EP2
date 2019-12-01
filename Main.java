@@ -11,7 +11,8 @@ class Main {
     public static void part1() {
         for(int i = 0; i < 100; i++) {
             ReadersPriority proporcao = new ReadersPriority(words, i, 100-i);
-            
+            part1 = 0;
+
             for(int j = 0; j < 50; j++) {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
@@ -28,11 +29,13 @@ class Main {
     public static void part2() {
         for(int i = 0; i < 100; i++) {
             WritersPriority proporcao = new WritersPriority(words, i, 100-i);
+            part2 = 0;
             
             for(int j = 0; j < 50; j++) {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
+                proporcao.join();
                 p = System.currentTimeMillis() - p;
                 part2 += p;
             }
@@ -45,6 +48,7 @@ class Main {
     public static void part3() {
         for(int i = 0; i < 100; i++) {
             UniqueAccess proporcao = new UniqueAccess(words, i, 100-i);
+            part3 = 0;
             
             for(int j = 0; j < 50; j++) {
                 proporcao.bake();
