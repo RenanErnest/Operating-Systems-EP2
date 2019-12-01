@@ -55,7 +55,7 @@ class Main {
             }
 
             part3 /= 50;
-            System.out.println("Prioridade para escritores. Leitores:" + i + " escritores:" + (100-i) + " média de tempo:" + part3);
+            System.out.println("Sem prioridade. Leitores:" + i + " escritores:" + (100-i) + " média de tempo:" + part3);
         }
     }
 
