@@ -3,6 +3,7 @@ import java.util.*;
 class CriticalRegionReadersPriority{
     String[] words;
     int readers = 0;
+    public int th = 0;
 
     public CriticalRegionReadersPriority(String[] words) {
         this.words = words;
@@ -30,6 +31,7 @@ class CriticalRegionReadersPriority{
         synchronized(this)
         {
             this.readers--;
+            th--;
             if (this.readers == 0)
             {
             this.notifyAll();
@@ -58,7 +60,10 @@ class CriticalRegionReadersPriority{
             Thread.sleep (1);
         }
         catch (InterruptedException e){}
-
+        synchronized(this)
+        {
+            th--;
+        }
         this.notifyAll();
     }
 }
@@ -73,6 +78,10 @@ class ReaderRP extends Thread {
 
     public void run() {
         String[] read = crit.read();
+        synchronized(crit)
+        {
+            crit.th++;
+        }
         //System.out.println(this.getName() + " leu");
     }
 
@@ -88,6 +97,10 @@ class WriterRP extends Thread {
 
     public void run() {
         crit.write();
+        synchronized(crit)
+        {
+            crit.th++;
+        }
         //System.out.println(this.getName() + " escreveu");
     }
     

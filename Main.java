@@ -20,6 +20,7 @@ class Main {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
+                while(proporcao.crit.th > 0){}
                 p = System.currentTimeMillis() - p;
                 part1 += p;
             }
@@ -42,7 +43,6 @@ class Main {
                 proporcao.bake();
                 long p = System.currentTimeMillis();
                 proporcao.execute();
-                proporcao.join();
                 p = System.currentTimeMillis() - p;
                 part2 += p;
             }
@@ -100,7 +100,7 @@ class Main {
         }
 
         part1();
-        part2();
-        part3();
+        //part2();
+        //part3();
     }
 }
