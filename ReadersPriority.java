@@ -108,7 +108,7 @@ class ReadersPriority{
         this.writers_num = writers;
     }
 
-    public void execute() {
+    public void bake() {
         
         // embaralhamento das threads
         ArrayList<Integer> numbers = new ArrayList<Integer>();
@@ -127,7 +127,9 @@ class ReadersPriority{
         {
             readers_writers[numbers.get(k)] = new WriterRP(crit);
         }
+    }
 
+    public void execute() {
         // executando as threads
         for(int i = 0; i < 100 ; i++)
         {

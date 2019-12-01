@@ -82,9 +82,7 @@ class ReaderWP extends Thread {
     }
 
     public void run() {
-        System.out.println("Run da thread " +  this.getName());
         String[] read = crit.read();
-        System.out.println("A thread " + this.getName() + " leu");
     }
 
 }
@@ -98,9 +96,7 @@ class WriterWP extends Thread {
     }
 
     public void run() {
-        System.out.println("Run da thread " +  this.getName());
         crit.write();
-        System.out.println("A thread " + this.getName() + " modificou");
     }
     
 }
@@ -120,8 +116,7 @@ class WritersPriority{
         this.writers_num = writers;
     }
 
-    public void execute() {
-
+    public void bake() {
         // embaralhamento das threads
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         for (int i = 0; i < 100; i++) 
@@ -139,7 +134,9 @@ class WritersPriority{
         {
             readers_writers[numbers.get(k)] = new WriterWP(crit);
         }
+    }
 
+    public void execute(){
         // executando as threads
         for(int i = 0; i < 100 ; i++)
         {
