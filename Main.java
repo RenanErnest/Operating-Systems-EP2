@@ -15,11 +15,9 @@ class Main {
     }
 
     public static void part2() {
-        int k = 0;
         for(int i = 0; i < 100; i++) {
             UniqueAccess proporcao = new UniqueAccess(words, i, 100-i);
-            System.out.println(k);
-            k++;
+            
             for(int j = 0; j < 50; j++) {
                 proporcao.execute();
             }
