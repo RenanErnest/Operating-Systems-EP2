@@ -40,7 +40,7 @@ class Main {
         return part1_total;
     }
 
-    public static void part2() {
+    public static long part2() {
         for(int i = 0; i < 100; i++) {
             WritersPriority proporcao = new WritersPriority(words, i, 100-i);
             part2 = 0;
@@ -63,11 +63,10 @@ class Main {
             System.out.println("Prioridade para escritores. Leitores:" + i + " escritores:" + (100-i) + " média de tempo:" + part2);
         }
 
-        part2_total /= 100;
-        System.out.println("Prioridade para escritores. MEDIA TOTAL:" + part2_total);
+        return part2_total;
     }
 
-    public static void part3() {
+    public static long part3() {
         for(int i = 0; i < 100; i++) {
             UniqueAccess proporcao = new UniqueAccess(words, i, 100-i);
             part3 = 0;
@@ -91,9 +90,7 @@ class Main {
             System.out.println("Sem prioridade. Leitores:" + i + " escritores:" + (100-i) + " média de tempo:" + part3);
         }
 
-        part3_total /= 100;
-        System.out.println("Sem prioridade. MEDIA TOTAL:" + part3_total);
-
+        return part3_total;
     }
 
     public static void main(String[] args) {
@@ -116,9 +113,11 @@ class Main {
             System.out.println("Não foi possível encontrar o arquivo 'bd.txt'");
         }
 
-        //long media_total1 = part1();
-        //System.out.println("Prioridade para leitores. MEDIA TOTAL:" + (media_total1/100));
-        part2();
-        //part3();
+        long media_total1 = part1();
+        System.out.println("Prioridade para leitores. MEDIA TOTAL:" + (media_total1/100));
+        long media_total2 = part2();
+        System.out.println("Prioridade para escritores. MEDIA TOTAL:" + (media_total2/100));
+        long media_total3 = part3();
+        System.out.println("Sem prioridade. MEDIA TOTAL:" + (media_total3/100));
     }
 }
