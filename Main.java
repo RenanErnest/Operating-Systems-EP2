@@ -11,19 +11,21 @@ class Main {
 
     public static String[] words = new String[36242];
 
-    public static void part1() {
+    public static long part1() {
+
+        ReadersPriority proporcao = new ReadersPriority(words);
+
         for(int i = 0; i < 100; i++) {
-            ReadersPriority proporcao = new ReadersPriority(words, i, 100-i);
             part1 = 0;
 
             for(int j = 0; j < 50; j++) {
-                proporcao.bake();
+                proporcao.bake(i, 100-i);
                 long p = System.currentTimeMillis();
                 proporcao.execute();
                 for (Thread thread : proporcao.readers_writers) {
                     try{
                     thread.join();
-                    } catch (Exception e){}
+                    } catch (Exception e){e.printStackTrace();}
 
                 }
                 p = System.currentTimeMillis() - p;
@@ -35,8 +37,7 @@ class Main {
             System.out.println("Prioridade para leitores. Leitores:" + i + " escritores:" + (100-i)  + " média de tempo:" + part1);
         }
 
-        part1_total /= 100;
-        System.out.println("Prioridade para leitores. MEDIA TOTAL:" + part1_total);
+        return part1_total;
     }
 
     public static void part2() {
@@ -115,8 +116,9 @@ class Main {
             System.out.println("Não foi possível encontrar o arquivo 'bd.txt'");
         }
 
-        part1();
-        //part2();
+        //long media_total1 = part1();
+        //System.out.println("Prioridade para leitores. MEDIA TOTAL:" + (media_total1/100));
+        part2();
         //part3();
     }
 }

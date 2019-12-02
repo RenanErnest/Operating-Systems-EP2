@@ -73,11 +73,11 @@ class CriticalRegionWritersPriority {
     }
 }
 
-class ReaderWP extends Thread {
+class ReaderRP extends Thread {
 
     CriticalRegionWritersPriority crit;
 
-    public ReaderWP(CriticalRegionWritersPriority crit) {
+    public ReaderRP(CriticalRegionWritersPriority crit) {
         this.crit = crit;
     }
 
@@ -87,11 +87,11 @@ class ReaderWP extends Thread {
 
 }
 
-class WriterWP extends Thread {
+class WriterRP extends Thread {
 
     CriticalRegionWritersPriority crit;
 
-    public WriterWP(CriticalRegionWritersPriority crit) {
+    public WriterRP(CriticalRegionWritersPriority crit) {
         this.crit = crit;
     }
 
@@ -101,7 +101,7 @@ class WriterWP extends Thread {
     
 }
 
-class WritersPriority{
+public class WritersPriority{
 
     public String[] words;
     public Thread[] readers_writers = new Thread[100];
