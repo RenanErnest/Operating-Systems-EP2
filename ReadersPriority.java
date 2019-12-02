@@ -62,7 +62,7 @@ class CriticalRegionReadersPriority{
     }
 }
 
-class ReaderRP extends Thread {
+class ReaderRP implements Runnable {
 
     CriticalRegionReadersPriority crit;
 
@@ -77,7 +77,7 @@ class ReaderRP extends Thread {
 
 }
 
-class WriterRP extends Thread {
+class WriterRP implements Runnable  {
 
     CriticalRegionReadersPriority crit;
 
@@ -99,40 +99,48 @@ class ReadersPriority{
     public CriticalRegionReadersPriority crit;
     public int readers_num;
     public int writers_num;
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+    ///////////
+    Runnable[] writers_pool = new Runnable[100];
+    Runnable[] readers_pool = new Runnable[100];
+    ///////////
 
-    public ReadersPriority(String[] words, int readers, int writers) {
+    public ReadersPriority(String[] words) {
         this.words = words;
         this.crit = new CriticalRegionReadersPriority(words);
-        this.readers_num = readers;
-        this.writers_num = writers;
-    }
-
-    public void bake() {
-        
-        // embaralhamento das threads
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
         for (int i = 0; i < 100; i++) 
         {
+            readers_pool[i] = new ReaderRP(crit);
+            writers_pool[i] = new WriterRP(crit);
             numbers.add(new Integer(i)); 
         }
+    }
+
+    public void bake(int readers, int writers) {
+        this.readers_num = readers;
+        this.writers_num = writers;
+        
+        // embaralhamento das threads
         Collections.shuffle(numbers);
         
         // preenchendo threads em ordem aleatoria seguindo as proporcoes
         for(int k = 0; k < readers_num; k++) // criar readers_num readers
         {
-            readers_writers[numbers.get(k)] = new ReaderRP(crit); 
+            readers_writers[k] = new Thread(readers_pool[k]); 
         }
         for(int k = readers_num; k < readers_num + writers_num; k++) // criar writers_num writers (começa no readers_num e vai até readers_num + writers_num: 100)
         {
-            readers_writers[numbers.get(k)] = new WriterRP(crit);
+            readers_writers[k] = new Thread(writers_pool[k]);
         }
     }
 
     public void execute() {
         // executando as threads
-        for(int i = 0; i < 100 ; i++)
-        {         
-            readers_writers[i].start();
+        for (Thread thread : readers_writers) {
+            try{
+            thread.start();
+            }
+            catch (Exception e){}
         }
     }
     
